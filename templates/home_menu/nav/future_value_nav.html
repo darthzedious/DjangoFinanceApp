@@ -1,0 +1,15 @@
+{% load auth_tag %}
+
+<ol>
+    <li>
+            <a class="dropdown-item"
+               href="{% auth_url user 'fv-simple-interest' %}"
+            >Future Value Simple Interest</a>
+        </li>
+    
+    <li>
+            <a class="dropdown-item"
+               href="{% auth_url user 'fv-compound-interest' %}"
+            >Future Value Compound Interest</a>
+        </li>
+</ol>

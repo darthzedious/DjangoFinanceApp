@@ -1,0 +1,32 @@
+{% extends 'home_menu/home.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Your Budgets</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for budget in budgets %}
+            <tr>
+                <td>{{ budget.category }}</td>
+                <td>{{ budget.amount }}</td>
+                <td>{{ budget.start_date }}</td>
+                <td>{{ budget.end_date }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    {% include 'personal_actions_templates/pagination.html' %}
+    
+    <a href="{% url 'create-budget' %}" class="btn btn-light">
+        Add Budget
+    </a>
+
+{% endblock %}

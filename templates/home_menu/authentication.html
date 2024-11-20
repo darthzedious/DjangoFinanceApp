@@ -1,0 +1,19 @@
+<div class="d-flex align-items-center ms-auto">
+    {% if user.is_authenticated %}
+
+        <p class="me-3 mb-0 text-light">Hello, {{ user.username }}!</p>
+
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="btn btn-primary me-2" type="submit"><i>Logout</i></button>
+        </form>
+
+    {% else %}
+        <a href="{% url 'login' %}" class="btn btn-primary me-2">
+            Log in
+        </a>
+        <a href="{% url 'register' %}" class="btn btn-secondary me-2">
+            Register
+        </a>
+    {% endif %}
+</div>

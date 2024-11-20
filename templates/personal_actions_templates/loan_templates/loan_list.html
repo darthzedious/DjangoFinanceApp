@@ -1,0 +1,32 @@
+{% extends 'home_menu/home.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Your Loans</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Interest Rate</th>
+            <th>Loan Term (Months)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for loan in loans %}
+        <tr>
+            <td>{{ loan.name }}</td>
+            <td>{{ loan.amount }}</td>
+            <td>{{ loan.interest_rate }}%</td>
+            <td>{{ loan.loan_term }}</td>
+            <td>
+                <a href="{% url 'loan_detail' loan.pk %}" class="btn btn-info btn-sm">Details</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

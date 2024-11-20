@@ -1,0 +1,37 @@
+{% extends 'home_menu/home.html' %}
+{% load static %}
+
+{% block content %}
+    <h2>Your Transactions</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.type }}</td>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.description }}</td>
+                <td>{{ transaction.date }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No transactions found.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Pagination Controls -->
+{% include 'personal_actions_templates/pagination.html' %}
+
+    <a href="{% url 'create-transaction' %}" class="btn btn-light">
+        Create Transaction
+    </a>
+{% endblock %}

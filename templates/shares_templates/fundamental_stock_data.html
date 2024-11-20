@@ -1,0 +1,126 @@
+{% extends 'home_menu/home.html' %}
+
+{% block content %}
+    <h3>Fundamental Stock Data</h3>
+
+    <form method="GET" action="{% url 'stock_data' %}">
+        <label for="symbol">Enter Stock Symbol:</label>
+        <input type="text" name="symbol" id="symbol" value="{{ symbol }}">
+        <button type="submit">Get Data</button>
+    </form>
+
+    {% if error_message %}
+        <p style="color:red;">{{ error_message }}</p>
+    {% endif %}
+
+    {% if stock_data %}
+        <h2>Data for {{ stock_data.Symbol }}</h2>
+        <p><strong>Company Name:</strong> {{ stock_data.Name }}</p>
+        <p><strong>Market Cap:</strong> {{ stock_data.MarketCapitalization }}</p>
+        <p><strong>PE Ratio:</strong> {{ stock_data.PERatio }}</p>
+        <p><strong>Dividend Yield:</strong> {{ stock_data.DividendYield }}</p>
+        <p><strong>Industry:</strong> {{ stock_data.Industry }}</p>
+        <p><strong>Description:</strong> {{ stock_data.Description }}</p>
+        <p><strong>Revenue:</strong> {{ stock_data.RevenueTTM }}</p>
+        <p><strong>Earnings Per Share (EPS):</strong> {{ stock_data.EPS }}</p>
+{#        <p><strong>Last Split Date:</strong> {{ stock_data.LastSplitDate }}</p>#}
+{#        <p><strong>Number of Employees:</strong> {{ stock_data.NumberOfEmployees }}</p>#}
+    {% endif %}
+    <br><br>
+    <a href="{% url 'home' %}">
+        <button type="button">Home Page</button>
+    </a>
+
+{% endblock %}
+
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Fundamental Stock Data</title>#}
+{#    <style>#}
+{#        body {#}
+{#            font-family: Arial, sans-serif;#}
+{#        }#}
+{#        .error {#}
+{#            color: red;#}
+{#        }#}
+{#        .data-table {#}
+{#            width: 100%;#}
+{#            border-collapse: collapse;#}
+{#            margin-top: 20px;#}
+{#        }#}
+{#        .data-table th, .data-table td {#}
+{#            border: 1px solid #ddd;#}
+{#            padding: 8px;#}
+{#        }#}
+{#        .data-table th {#}
+{#            background-color: #f2f2f2;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{#    <h1>Fundamental Stock Data</h1>#}
+{##}
+{#    <form method="GET" action="{% url 'stock_data' %}">#}
+{#        <label for="symbol">Enter Stock Symbol:</label>#}
+{#        <input type="text" name="symbol" id="symbol" value="{{ symbol }}" required>#}
+{#        <button type="submit">Get Data</button>#}
+{#    </form>#}
+{##}
+{#    {% if error_message %}#}
+{#        <p class="error">{{ error_message }}</p>#}
+{#    {% endif %}#}
+{##}
+{#    {% if stock_data %}#}
+{#        <h2>Data for {{ stock_data.Symbol }}</h2>#}
+{#        <table class="data-table">#}
+{#            <tr>#}
+{#                <th>Company Name</th>#}
+{#                <td>{{ stock_data.Name }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Symbol</th>#}
+{#                <td>{{ stock_data.Symbol }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Market Cap</th>#}
+{#                <td>{{ stock_data.MarketCapitalization }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>PE Ratio</th>#}
+{#                <td>{{ stock_data.PERatio }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Dividend Yield</th>#}
+{#                <td>{{ stock_data.DividendYield }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Industry</th>#}
+{#                <td>{{ stock_data.Industry }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Description</th>#}
+{#                <td>{{ stock_data.Description }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Revenue</th>#}
+{#                <td>{{ stock_data.Revenue }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Earnings Per Share (EPS)</th>#}
+{#                <td>{{ stock_data.EarningsPerShare }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Last Split Date</th>#}
+{#                <td>{{ stock_data.LastSplitDate }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Number of Employees</th>#}
+{#                <td>{{ stock_data.NumberOfEmployees }}</td>#}
+{#            </tr>#}
+{#        </table>#}
+{#    {% endif %}#}
+{#</body>#}
+{#</html>#}

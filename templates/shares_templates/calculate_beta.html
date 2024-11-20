@@ -1,0 +1,24 @@
+{% extends 'home_menu/home.html' %}
+
+{% block content %}
+    <h3>Calculate Beta Coefficient</h3>
+
+    <form method="GET" action="{% url 'calculate_beta' %}">
+        <label for="symbol">Enter Stock Symbol:</label>
+        <input type="text" name="symbol" id="symbol" value="{{ symbol }}">
+        <button type="submit">Calculate Beta</button>
+    </form>
+
+    {% if error_message %}
+        <p style="color:red;">{{ error_message }}</p>
+    {% endif %}
+
+    {% if beta is not None %}
+        <h2>Beta for {{ symbol }}: {{ beta }}</h2>
+    {% endif %}
+    
+   <br><br>
+    <a href="{% url 'home' %}">
+        <button type="button">Home Page</button>
+    </a>
+{% endblock %}

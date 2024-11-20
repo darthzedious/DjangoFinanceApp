@@ -1,0 +1,17 @@
+{% extends 'home_menu/home.html' %}
+{% load static %}
+
+{% block content %}
+    <h2>Your Portfolios</h2>
+    <ul>
+        {% for portfolio in portfolio %}
+            <li>{{ portfolio.name }} - {{ portfolio.description }}; {{ portfolio.created_at }}</li>
+        {% endfor %}
+    </ul>
+
+    {% include 'personal_actions_templates/pagination.html' %}
+    
+    <a href="{% url 'create-portfolio' %}" class="btn btn-light">
+        Create Portfolio
+    </a>
+{% endblock %}

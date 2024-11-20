@@ -1,0 +1,21 @@
+{% extends 'home_menu/home.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="create-transaction-container mt-5">
+        <div class="create-transaction-card">
+            <div class="create-transaction-header">
+                <h3>Create a New {{ operation_name }}</h3>
+            </div>
+            <div class="create-transaction-body">
+                <form method="post" class="create-transaction-form">
+                    {% csrf_token %}
+                    <div class="create-transaction-group">
+                        {{ form.as_p }}
+                    </div>
+                    <button type="submit" class="create-transaction-btn">Add {{ operation_name }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

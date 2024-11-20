@@ -1,0 +1,30 @@
+{% extends 'home_menu/home.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Loan Details</h2>
+<table class="table">
+    <tr>
+        <th>Name:</th>
+        <td>{{ loan.name }}</td>
+    </tr>
+    <tr>
+        <th>Amount:</th>
+        <td>{{ loan.amount }}</td>
+    </tr>
+    <tr>
+        <th>Interest Rate:</th>
+        <td>{{ loan.interest_rate }}%</td>
+    </tr>
+    <tr>
+        <th>Loan Term:</th>
+        <td>{{ loan.loan_term }} months</td>
+    </tr>
+    <tr>
+        <th>Created At:</th>
+        <td>{{ loan.created_at }}</td>
+    </tr>
+</table>
+
+
+{% endblock %}
