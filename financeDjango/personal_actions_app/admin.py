@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from financeDjango.mixins import AdminAddFieldSetMixin
-from financeDjango.personal_actions_app.models import Budget, FinancialGoal, InvestmentPortfolio
+from financeDjango.personal_actions_app.models import Budget, FinancialGoal, InvestmentPortfolio, Transaction
 
 
 @admin.register(Budget)
@@ -69,6 +69,28 @@ class InvestmentPortfolioAdmin(AdminAddFieldSetMixin, admin.ModelAdmin):
             {
                 "classes": ("wide",),
                 'fields': ('user', 'name', 'description', ),
+            }
+        ),
+    )
+
+@admin.register(Transaction)
+class TransactionAdmin(AdminAddFieldSetMixin, admin.ModelAdmin):
+    list_display = ('user', 'type', 'amount', 'description', 'date', )
+    search_fields = ('user__email', 'type', 'description')
+    ordering = ('user',)
+    list_filter = ('user', 'type')
+    list_per_page = 15
+
+    fieldsets = (
+        ('Edit Goal', {'fields': ('user', 'type', 'amount', 'description',)}),
+    )
+
+    add_fieldsets = (
+        (
+            'Add Goal',
+            {
+                "classes": ("wide",),
+                'fields': ('user', 'type', 'amount', 'description',),
             }
         ),
     )

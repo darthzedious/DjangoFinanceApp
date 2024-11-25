@@ -25,7 +25,9 @@ class AppUserAdmin(UserAdmin):
     form = AppUserChangeForm
     list_display = ('email', )
 
-    list_display = ('pk', 'email', 'is_staff', 'is_superuser', 'view_budgets', 'view_finance_goals', 'view_investment', )
+    list_display = ('pk', 'email', 'is_staff', 'is_superuser',
+                    'view_budgets', 'view_finance_goals',
+                    'view_investment', 'view_transactions')
     search_fields = ('email',)
     ordering = ('pk',)
     list_filter = ('is_staff', 'is_superuser', 'is_active',)
@@ -82,3 +84,12 @@ class AppUserAdmin(UserAdmin):
 
     view_investment.short_description = "Investments"
 
+    def view_transactions(self, obj):
+        url = reverse('admin:personal_actions_app_transaction_changelist')
+        return format_html(
+            '<a href="{}?user__id__exact={}">View Goals</a>',
+            url,
+            obj.id,
+        )
+
+    view_transactions.short_description = "Transactions"
