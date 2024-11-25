@@ -53,4 +53,22 @@ class FinancialGoalAdmin(AdminAddFieldSetMixin, admin.ModelAdmin):
 
 @admin.register(InvestmentPortfolio)
 class InvestmentPortfolioAdmin(AdminAddFieldSetMixin, admin.ModelAdmin):
-    pass
+    list_display = ('user', 'name', 'description', 'created_at')
+    search_fields = ('user__email', 'name', 'description')
+    ordering = ('user',)
+    list_filter = ('user', 'description')
+    list_per_page = 15
+
+    fieldsets = (
+        ('Edit Goal', {'fields': ('user', 'name', 'description', )}),
+    )
+
+    add_fieldsets = (
+        (
+            'Add Goal',
+            {
+                "classes": ("wide",),
+                'fields': ('user', 'name', 'description', ),
+            }
+        ),
+    )
