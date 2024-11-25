@@ -40,3 +40,6 @@ class Profile(models.Model):
             return self.first_name + " " + self.last_name
 
         return self.first_name or self.last_name or "Anonymous"
+
+    def __str__(self):
+        return self.get_full_name()

@@ -17,6 +17,7 @@ class RegisterForm(PlaceholderMixin, UserCreationForm):
 class AppUserChangeForm(PlaceholderMixin, UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = UserModel
+        fields = '__all__'
 
 class ProfileEditForm(PlaceholderMixin, forms.ModelForm):
     class Meta:
