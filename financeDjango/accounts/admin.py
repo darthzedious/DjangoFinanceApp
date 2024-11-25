@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
+from django.urls import reverse
 from django.utils.html import format_html
 
 from financeDjango.accounts.forms import RegisterForm, AppUserChangeForm
@@ -22,12 +23,13 @@ class AppUserAdmin(UserAdmin):
     inlines = (ProfileInline, )
     add_form = RegisterForm
     form = AppUserChangeForm
-    list_display = ('username', 'email')
+    list_display = ('email', )
 
-    list_display = ('pk', 'email', 'is_staff', 'is_superuser', 'view_budgets',)
+    list_display = ('pk', 'email', 'is_staff', 'is_superuser', 'view_budgets', 'view_finance_goals', )
     search_fields = ('email',)
     ordering = ('pk',)
     list_filter = ('is_staff', 'is_superuser', 'is_active',)
+    list_per_page = 15
 
     fieldsets = (
         ('Credentials', {'fields': ('email', 'password')}),
@@ -47,9 +49,25 @@ class AppUserAdmin(UserAdmin):
     )
 
     def view_budgets(self, obj):
+        # return format_html(
+        #     '<a href="/admin/personal_actions_app/budget/?user__id__exact={}">View Budgets</a>',
+        #     obj.id
+        # )
+        url = reverse('admin:personal_actions_app_budget_changelist')
         return format_html(
-            '<a href="/admin/personal_actions_app/budget/?user__id__exact={}">View Budgets</a>',
-            obj.id
+            '<a href="{}?user__id__exact={}">View Budgets</a>',
+            url,
+            obj.id,
         )
 
     view_budgets.short_description = "Budgets"
+
+    def view_finance_goals(self, obj):
+        url = reverse('admin:personal_actions_app_financialgoal_changelist')
+        return format_html(
+            '<a href="{}?user__id__exact={}">View Goals</a>',
+            url,
+            obj.id,
+        )
+
+    view_finance_goals.short_description = "Goals"
