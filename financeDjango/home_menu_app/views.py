@@ -12,3 +12,6 @@ def future_value_menu(request):
 
 def discount_factor_menu(request):
     return render(request, 'home_menu/nav/discount_factor_nav.html')
+
+def repayment_plans_menu(request):
+    return render(request, 'home_menu/nav/repayment_plans_nav.html')

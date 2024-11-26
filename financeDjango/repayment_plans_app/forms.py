@@ -3,7 +3,7 @@ from django import forms
 from financeDjango.repayment_plans_app.models import EqualInstallmentPlan
 
 
-class RepaymentPlanForm(forms.ModelForm):
+class EqualInstallmentForm(forms.ModelForm):
     class Meta:
         model = EqualInstallmentPlan
         fields = ['borrowed_amount', 'interest_rate', 'periods']
@@ -25,3 +25,9 @@ class RepaymentPlanForm(forms.ModelForm):
 
             }),
         },
+
+    def clean_interest_rate(self):
+        interest_rate = self.cleaned_data['interest_rate']
+        if interest_rate <= 0:
+            raise forms.ValidationError("Interest rate must be greater than zero.")
+        return interest_rate
