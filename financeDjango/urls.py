@@ -28,4 +28,5 @@ urlpatterns = [
     path('future-value/', include('financeDjango.future_value_app.urls')),
     path('discount-factor/', include('financeDjango.discount_factor_app.urls')),
     path('personal-actions/', include('financeDjango.personal_actions_app.urls')),
+    path('repayment_plans/', include('financeDjango.repayment_plans_app.urls')),
 ]
