@@ -1,17 +1,13 @@
+import ast
 import json
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
-from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView, CreateView, ListView
 
 from financeDjango.repayment_plans_app.forms import EqualInstallmentForm
 from financeDjango.repayment_plans_app.helpers import calculate_equal_installment
 from financeDjango.repayment_plans_app.models import EqualInstallmentPlan
-
-
-
 
 
 class EqualInstallmentPlanCalculateView(LoginRequiredMixin, FormView):
@@ -25,6 +21,7 @@ class EqualInstallmentPlanCalculateView(LoginRequiredMixin, FormView):
             periods = form.cleaned_data['periods']
 
             repayment = calculate_equal_installment(borrowed_amount, interest_rate, periods)
+            print(repayment)
 
         except Exception as e:
             form.add_error(None, f"An error occurred during calculation: {e}")
@@ -46,7 +43,7 @@ class EqualInstallmentPlanSaveView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        # form.instance.repayment = json.dumps(form.instance.repayment)
+
         return super().form_valid(form)
 
 
@@ -56,33 +53,27 @@ class RepaymentPlansListView(LoginRequiredMixin, ListView):
     context_object_name = 'plans'
     paginate_by = 5
 
-    # def get_queryset(self):
-    #     return EqualInstallmentPlan.objects.filter(user=self.request.user)
-
-    # def get_queryset(self):
-    #     queryset = EqualInstallmentPlan.objects.filter(user=self.request.user)
-    #
-    #     # Debugging: Print or log the queryset to check if it's correct
-    #     print(f"Queryset contains: {queryset}")  # or use logging
-    #
-    #     for plan in queryset:
-    #         try:
-    #             # Deserialize repayment field from JSON string to Python list of dictionaries
-    #             plan.repayment_data = json.loads(plan.repayment)
-    #         except json.JSONDecodeError:
-    #             plan.repayment_data = []  # Fallback if JSON is invalid
-    #
-    #     return queryset
     def get_queryset(self):
-        queryset = EqualInstallmentPlan.objects.filter(user=self.request.user)
-        print(f"Queryset contains: {queryset}")  # or use logging
-        # Deserialize repayment field from JSON string to Python list of dictionaries
-
-        # for plan in queryset:
-        #     print(plan.repayment)
-        #     try:
-        #         plan.repayment = json.loads(plan.repayment)  # Deserialize to list of dicts
-        #     except json.JSONDecodeError:
-        #         plan.repayment = []  # Fallback if JSON is invalid
+        queryset = EqualInstallmentPlan.objects.filter(user=self.request.user).order_by('-id')
+        for plan in queryset:
+            print(f"Plan ID {plan.id}: repayment={plan.repayment}")
 
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        for plan in context['plans']:
+            try:
+                # Try to load the JSON with proper quotes
+                plan.repayment_table = json.loads(plan.repayment)
+            except json.JSONDecodeError:
+                try:
+                    # Handle pseudo-JSON with single quotes using ast.literal_eval
+                    plan.repayment_table = ast.literal_eval(plan.repayment)
+                except (ValueError, SyntaxError) as e:
+                    print(f"Error parsing repayment data for plan {plan.id}: {e}")
+                    # Default to an empty list if both methods fail
+                    plan.repayment_table = []
+
+        return context
