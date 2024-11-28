@@ -5,14 +5,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import FormView, CreateView, ListView
 
+from financeDjango.mixins import OperationNameContextMixin
 from financeDjango.repayment_plans_app.forms import EqualInstallmentForm
 from financeDjango.repayment_plans_app.helpers import calculate_equal_installment
 from financeDjango.repayment_plans_app.models import EqualInstallmentPlan
 
 
-class EqualInstallmentPlanCalculateView(LoginRequiredMixin, FormView):
-    template_name = 'repayment_plans_templates/equal_installment/equal_installment_calculation.html'
+class EqualInstallmentPlanCalculateView(LoginRequiredMixin, OperationNameContextMixin, FormView):
+    template_name = 'repayment_plans_templates/equal_installment_pp/equal_installment_and_pp_calculation.html'
     form_class = EqualInstallmentForm
+    operation_name = 'Equal Installment Repayment Plan'
 
     def form_valid(self, form):
         try:
@@ -47,16 +49,16 @@ class EqualInstallmentPlanSaveView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class RepaymentPlansListView(LoginRequiredMixin, ListView):
+class EqualInstallmentPlanListView(LoginRequiredMixin, ListView):
     model = EqualInstallmentPlan
-    template_name = 'repayment_plans_templates/equal_installment/repayment_plans_list.html'
+    template_name = 'repayment_plans_templates/equal_installment_pp/repayment_plans_list.html'
     context_object_name = 'plans'
     paginate_by = 5
 
     def get_queryset(self):
         queryset = EqualInstallmentPlan.objects.filter(user=self.request.user).order_by('-id')
-        for plan in queryset:
-            print(f"Plan ID {plan.id}: repayment={plan.repayment}")
+        # for plan in queryset:
+        #     print(f"Plan ID {plan.id}: repayment={plan.repayment}")
 
         return queryset
 
@@ -77,3 +79,4 @@ class RepaymentPlansListView(LoginRequiredMixin, ListView):
                     plan.repayment_table = []
 
         return context
+
