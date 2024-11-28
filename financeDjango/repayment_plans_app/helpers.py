@@ -1,4 +1,3 @@
-from tabulate import tabulate
 def calculate_present_value_annuity_factor_end_year_payment(r, n):
     """
     Args:
@@ -29,3 +28,24 @@ def calculate_equal_installment(borrowed_amount, r, n):
         })
 
     return repayment_plan  # List of dictionaries
+
+def calculate_equal_principle_portion(borrowed_amount, r, n):
+
+    repayment_plan = []
+
+    pp = borrowed_amount / n
+    rp = borrowed_amount
+
+    for i in range(1, n + 1):
+        ip = rp * r
+        installment = pp + ip
+        rp -= pp
+        repayment_plan.append({
+            "n": i,
+            "C": round(installment, 2),
+            "IP": round(ip, 2),
+            "PP": round(pp, 2),
+            "RP": round(rp, 2),
+        })
+
+    return repayment_plan

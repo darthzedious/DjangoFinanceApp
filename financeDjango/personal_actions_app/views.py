@@ -15,11 +15,6 @@ class CreateTransactionView(LoginRequiredMixin, CreateActionFormValidMixin, Oper
     operation_name = 'Transaction'
 
 
-    # def form_valid(self, form):
-    #     form.instance.user = self.request.user
-    #     return super().form_valid(form)
-
-
 class TransactionListView(LoginRequiredMixin, ListView):
     model = Transaction
     template_name = 'personal_actions_templates/transaction_templates/transaction_list.html'

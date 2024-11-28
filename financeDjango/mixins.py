@@ -1,3 +1,7 @@
+import ast
+import json
+from json import JSONDecodeError
+
 class OperationNameContextMixin:
     operation_name = ''
 
@@ -28,3 +32,22 @@ class AdminAddFieldSetMixin:
         if obj is None: # If object is not already created return add_fieldsets
             return self.add_fieldsets
         return super().get_fieldsets(request, obj)
+
+class RepaymentJSONContextToTableMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        for plan in context['plans']:
+            try:
+                # Try to load the JSON with proper quotes
+                plan.repayment_table = json.loads(plan.repayment)
+            except json.JSONDecodeError:
+                try:
+                    # Handle pseudo-JSON with single quotes using ast.literal_eval
+                    plan.repayment_table = ast.literal_eval(plan.repayment)
+                except (ValueError, SyntaxError) as e:
+                    print(f"Error parsing repayment data for plan {plan.id}: {e}")
+                    # Default to an empty list if both methods fail
+                    plan.repayment_table = []
+
+        return context

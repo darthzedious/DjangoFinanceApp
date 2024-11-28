@@ -1,11 +1,10 @@
 from django import forms
 
-from financeDjango.repayment_plans_app.models import EqualInstallmentPlan
+from financeDjango.repayment_plans_app.models import EqualInstallmentPlan, EqualPrinciplePortionPlan
 
 
-class EqualInstallmentForm(forms.ModelForm):
+class BaseEqualCPPForm(forms.ModelForm):
     class Meta:
-        model = EqualInstallmentPlan
         fields = ['borrowed_amount', 'interest_rate', 'periods']
         widgets = {
             'borrowed_amount': forms.NumberInput(attrs={
@@ -22,12 +21,14 @@ class EqualInstallmentForm(forms.ModelForm):
                 'min': 1,
                 'class': 'form-control',
                 'placeholder': 'Number of periods e.g. 4...',
-
             }),
-        },
+        }
 
-    def clean_interest_rate(self):
-        interest_rate = self.cleaned_data['interest_rate']
-        if interest_rate <= 0:
-            raise forms.ValidationError("Interest rate must be greater than zero.")
-        return interest_rate
+class EqualInstallmentForm(BaseEqualCPPForm):
+    class Meta(BaseEqualCPPForm.Meta):
+        model = EqualInstallmentPlan
+
+class EqualPrinciplePortionForm(BaseEqualCPPForm):
+    class Meta(BaseEqualCPPForm.Meta):
+        model = EqualPrinciplePortionPlan
+
