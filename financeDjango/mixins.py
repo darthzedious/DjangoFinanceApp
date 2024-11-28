@@ -21,17 +21,19 @@ class PlaceholderMixin:
         super().__init__(*args, **kwargs)
         self.add_placeholders()
 
-class CreateActionFormValidMixin:
 
+class CreateActionFormValidMixin:
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
 
 class AdminAddFieldSetMixin:
     def get_fieldsets(self, request, obj=None):
         if obj is None: # If object is not already created return add_fieldsets
             return self.add_fieldsets
         return super().get_fieldsets(request, obj)
+
 
 class RepaymentJSONContextToTableMixin:
     def get_context_data(self, **kwargs):

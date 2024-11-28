@@ -1,6 +1,6 @@
 from django import forms
 
-from financeDjango.repayment_plans_app.models import EqualInstallmentPlan, EqualPrinciplePortionPlan
+from financeDjango.repayment_plans_app.models import EqualInstallmentPlan, EqualPrincipalPortionPlan
 
 
 class BaseEqualCPPForm(forms.ModelForm):
@@ -28,7 +28,16 @@ class EqualInstallmentForm(BaseEqualCPPForm):
     class Meta(BaseEqualCPPForm.Meta):
         model = EqualInstallmentPlan
 
-class EqualPrinciplePortionForm(BaseEqualCPPForm):
+class EqualPrincipalPortionForm(BaseEqualCPPForm):
     class Meta(BaseEqualCPPForm.Meta):
-        model = EqualPrinciplePortionPlan
+        model = EqualPrincipalPortionPlan
 
+
+class BaseChangeableIPForm(forms.ModelForm):
+    pass
+
+class EqualInstallmentChangeableIPForm(BaseChangeableIPForm):
+    pass
+
+class EqualPrincipalPortionChangeableIPForm(BaseChangeableIPForm):
+    pass

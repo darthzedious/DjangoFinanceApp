@@ -7,9 +7,9 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView, CreateView, ListView
 
 from financeDjango.mixins import OperationNameContextMixin, CreateActionFormValidMixin, RepaymentJSONContextToTableMixin
-from financeDjango.repayment_plans_app.forms import EqualInstallmentForm, EqualPrinciplePortionForm
+from financeDjango.repayment_plans_app.forms import EqualInstallmentForm, EqualPrincipalPortionForm
 from financeDjango.repayment_plans_app.helpers import calculate_equal_installment, calculate_equal_principle_portion
-from financeDjango.repayment_plans_app.models import EqualInstallmentPlan, EqualPrinciplePortionPlan
+from financeDjango.repayment_plans_app.models import EqualInstallmentPlan, EqualPrincipalPortionPlan
 
 
 class EqualInstallmentPlanCalculateView(LoginRequiredMixin, OperationNameContextMixin, FormView):
@@ -58,7 +58,7 @@ class EqualInstallmentPlanListView(LoginRequiredMixin,RepaymentJSONContextToTabl
 #2
 class EqualPPPlanCalculateView(LoginRequiredMixin, OperationNameContextMixin, FormView):
     template_name = 'repayment_plans_templates/equal_installment_pp/equal_installment_and_pp_calculation.html'
-    form_class = EqualPrinciplePortionForm
+    form_class = EqualPrincipalPortionForm
     operation_name = 'Equal Principle Portion Repayment Plan'
 
     def form_valid(self, form):
@@ -83,17 +83,17 @@ class EqualPPPlanCalculateView(LoginRequiredMixin, OperationNameContextMixin, Fo
         ))
 
 class EqualPPPlanSaveView(LoginRequiredMixin, CreateActionFormValidMixin, CreateView):
-    model = EqualPrinciplePortionPlan
+    model = EqualPrincipalPortionPlan
     fields = ['borrowed_amount', 'interest_rate', 'periods', 'repayment']
     success_url = reverse_lazy('equal-pp-calculation')
 
 
 class EqualPPPlanListView(LoginRequiredMixin, RepaymentJSONContextToTableMixin, ListView):
-    model = EqualPrinciplePortionPlan
+    model = EqualPrincipalPortionPlan
     template_name = 'repayment_plans_templates/equal_installment_pp/repayment_plans_list.html'
     context_object_name = 'plans'
     paginate_by = 5
 
     def get_queryset(self):
-        queryset = EqualPrinciplePortionPlan.objects.filter(user=self.request.user).order_by('-id')
+        queryset = EqualPrincipalPortionPlan.objects.filter(user=self.request.user).order_by('-id')
         return queryset
