@@ -1,6 +1,7 @@
 from django import forms
 
-from financeDjango.repayment_plans_app.models import EqualInstallmentPlan, EqualPrincipalPortionPlan
+from financeDjango.repayment_plans_app.models import EqualInstallmentPlan, EqualPrincipalPortionPlan, \
+    EqualInstallmentChangeableIPPlan, EqualPrincipalPortionChangeableIPPlan
 
 
 class BaseEqualCPPForm(forms.ModelForm):
@@ -34,10 +35,40 @@ class EqualPrincipalPortionForm(BaseEqualCPPForm):
 
 
 class BaseChangeableIPForm(forms.ModelForm):
-    pass
+    class Meta:
+        fields = ['borrowed_amount', 'interest_rate_first_period', 'interest_rate_second_period', 'first_period', 'second_period']
+        widgets = {
+            'borrowed_amount': forms.NumberInput(attrs={
+                'step': '0.01',
+                'class': 'form-control',
+                'placeholder': 'The amount borrowed. e.g. 31700',
+            }),
+            'interest_rate_first_period': forms.NumberInput(attrs={
+                'step': '0.01',
+                'class': 'form-control',
+                'placeholder': 'Interest rate for period (e.g., 0.1 for 10%)',
+            }),
+            'interest_rate_second_period': forms.NumberInput(attrs={
+                'step': '0.01',
+                'class': 'form-control',
+                'placeholder': 'Interest rate for period (e.g., 0.1 for 10%)',
+            }),
+            'first_period': forms.NumberInput(attrs={
+                'step': '0.01',
+                'class': 'form-control',
+                'placeholder': 'First repayment periods (e.g., 4)',
+            }),
+            'second_period': forms.NumberInput(attrs={
+                'step': '0.01',
+                'class': 'form-control',
+                'placeholder': 'Second repayment periods (e.g., 2)',
+            })
+        }
 
 class EqualInstallmentChangeableIPForm(BaseChangeableIPForm):
-    pass
+    class Meta(BaseChangeableIPForm.Meta):
+        model = EqualInstallmentChangeableIPPlan
 
 class EqualPrincipalPortionChangeableIPForm(BaseChangeableIPForm):
-    pass
+    class Meta(BaseChangeableIPForm.Meta):
+        model = EqualPrincipalPortionChangeableIPPlan
