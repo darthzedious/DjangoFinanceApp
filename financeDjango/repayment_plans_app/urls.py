@@ -11,4 +11,10 @@ urlpatterns = [
     path('equal-pp-save/', views.EqualPPPlanSaveView.as_view(), name='equal-pp-save'),
     path('equal-pp-plans-list/', views.EqualPPPlanListView.as_view(),
          name='equal-pp-plans-list'),
+    path('equal-installment-changeable-ip-calculation/', views.EqualInstallmentChangeableIpCalculateView.as_view(),
+         name='equal-installment-changeable-ip-calculation'),
+    path('equal-installment-changeable-ip-save/', views.EqualInstallmentChangeableIpSaveView.as_view(),
+         name='equal-installment-changeable-ip-save'),
+    path('equal-installment-changeable-ip-list/', views.EqualInstallmentChangeableIpListView.as_view(),
+         name='equal-installment-changeable-ip-list'),
 ]

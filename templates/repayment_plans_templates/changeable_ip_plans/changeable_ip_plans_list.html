@@ -8,10 +8,11 @@
                     <h4>Repayment Plan {{ plan.id }}</h4>
                 </div>
                 <div class="card-body">
-                    <p><strong>Borrowed Amount:</strong> {{ plan.borrowed_amount }}</p>
-                    <p><strong>Interest Rate:</strong> {{ plan.interest_rate }}%</p>
-                    <p><strong>Periods:</strong> {{ plan.periods }}</p>
-
+                        <p><strong>Borrowed Amount:</strong> {{ plan.borrowed_amount }}</p>
+                        <p><strong>Interest Rate For The First Period:</strong> {{ plan.interest_rate_first_period }}%</p>
+                        <p><strong>Interest Rate For The Second Period:</strong> {{ plan.interest_rate_second_period }}%</p>
+                        <p><strong>First Periods:</strong> {{ plan.first_period }}</p>
+                        <p><strong>Second Periods:</strong> {{ plan.second_period }}</p>
                     {% if plan.repayment %}
                         <table class="table table-striped">
                             <thead>
