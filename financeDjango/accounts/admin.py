@@ -52,10 +52,6 @@ class AppUserAdmin(UserAdmin):
     )
 
     def view_budgets(self, obj):
-        # return format_html(
-        #     '<a href="/admin/personal_actions_app/budget/?user__id__exact={}">View Budgets</a>',
-        #     obj.id
-        # )
         url = reverse('admin:personal_actions_app_budget_changelist')
         return format_html(
             '<a href="{}?user__id__exact={}">View Budgets</a>',

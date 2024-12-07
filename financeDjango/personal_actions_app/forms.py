@@ -1,4 +1,6 @@
 from django import forms
+
+from financeDjango.mixins import DisabledReadonlyMixin
 from financeDjango.personal_actions_app.models import Transaction, InvestmentPortfolio, Budget, FinancialGoal
 
 
@@ -22,6 +24,10 @@ class TransactionForm(forms.ModelForm):
             }),
         }
 
+class TransactionDeleteForm(DisabledReadonlyMixin, TransactionForm):
+    pass
+
+
 class PortfolioForm(forms.ModelForm):
     class Meta:
         model = InvestmentPortfolio
@@ -37,6 +43,9 @@ class PortfolioForm(forms.ModelForm):
                 'placeholder': 'Describe your investment...',
             }),
         }
+
+class PortfolioDeleteForm(DisabledReadonlyMixin, PortfolioForm):
+    pass
 
 class BudgetForm(forms.ModelForm):
     class Meta:
@@ -61,6 +70,9 @@ class BudgetForm(forms.ModelForm):
             }),
         }
 
+class BudgetDeleteForm(DisabledReadonlyMixin, BudgetForm):
+    pass
+
 class GoalForm(forms.ModelForm):
     class Meta:
         model = FinancialGoal
@@ -84,3 +96,5 @@ class GoalForm(forms.ModelForm):
                 'placeholder': 'Choose the deadline date...',
             }),
         }
+class GoalDeleteForm(DisabledReadonlyMixin, GoalForm):
+    pass

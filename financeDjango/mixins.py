@@ -1,6 +1,6 @@
 import ast
 import json
-from json import JSONDecodeError
+
 
 class OperationNameContextMixin:
     operation_name = ''
@@ -10,6 +10,13 @@ class OperationNameContextMixin:
         context['operation_name'] = self.operation_name
         return context
 
+class DisabledReadonlyMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields.values(): # ('name': object_field)
+            field.widget.attrs['disabled'] = True
+            field.widget.attrs['readonly'] = True
 
 class PlaceholderMixin:
     def add_placeholders(self):

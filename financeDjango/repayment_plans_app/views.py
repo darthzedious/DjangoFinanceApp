@@ -1,7 +1,3 @@
-# import ast
-# import json
-# from json import JSONDecodeError
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import FormView, CreateView, ListView
@@ -104,6 +100,7 @@ class EqualPPPlanListView(LoginRequiredMixin, RepaymentJSONContextToTableMixin, 
         return queryset
 
 
+#3
 class EqualInstallmentChangeableIpCalculateView(LoginRequiredMixin, OperationNameContextMixin, FormView):
     template_name = 'repayment_plans_templates/equal_installment_pp/repayment_plans_calculations.html'
     form_class = EqualInstallmentChangeableIPForm
