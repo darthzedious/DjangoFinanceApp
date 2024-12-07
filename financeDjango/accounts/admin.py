@@ -23,11 +23,12 @@ class AppUserAdmin(UserAdmin):
     inlines = (ProfileInline, )
     add_form = RegisterForm
     form = AppUserChangeForm
-    list_display = ('email', )
 
     list_display = ('pk', 'email', 'is_staff', 'is_superuser',
                     'view_budgets', 'view_finance_goals',
-                    'view_investment', 'view_transactions')
+                    'view_investment', 'view_transactions', 'view_equal_installment_plans',
+                    'view_equal_principal_portion_plans', 'view_equal_installment_changeable_ip_plans')
+
     search_fields = ('email',)
     ordering = ('pk',)
     list_filter = ('is_staff', 'is_superuser', 'is_active',)
@@ -77,7 +78,7 @@ class AppUserAdmin(UserAdmin):
     def view_investment(self, obj):
         url = reverse('admin:personal_actions_app_investmentportfolio_changelist')
         return format_html(
-            '<a href="{}?user__id__exact={}">View Goals</a>',
+            '<a href="{}?user__id__exact={}">View Portfolios</a>',
             url,
             obj.id,
         )
@@ -87,9 +88,39 @@ class AppUserAdmin(UserAdmin):
     def view_transactions(self, obj):
         url = reverse('admin:personal_actions_app_transaction_changelist')
         return format_html(
-            '<a href="{}?user__id__exact={}">View Goals</a>',
+            '<a href="{}?user__id__exact={}">View Transactions</a>',
             url,
             obj.id,
         )
 
     view_transactions.short_description = "Transactions"
+
+    def view_equal_installment_plans(self, obj):
+        url = reverse('admin:repayment_plans_app_equalinstallmentplan_changelist')
+        return format_html(
+            '<a href="{}?user__id__exact={}">View Plans</a>',
+            url,
+            obj.id,
+        )
+
+    view_equal_installment_plans.short_description = "Equal Install Plans"
+
+    def view_equal_principal_portion_plans(self, obj):
+        url = reverse('admin:repayment_plans_app_equalprincipalportionplan_changelist')
+        return format_html(
+            '<a href="{}?user__id__exact={}">View Plans</a>',
+            url,
+            obj.id,
+        )
+
+    view_equal_principal_portion_plans.short_description = "Equal Principal Portion Plans"
+
+    def view_equal_installment_changeable_ip_plans(self, obj):
+        url = reverse('admin:repayment_plans_app_equalinstallmentchangeableipplan_changelist')
+        return format_html(
+            '<a href="{}?user__id__exact={}">View Plans</a>',
+            url,
+            obj.id,
+        )
+
+    view_equal_installment_changeable_ip_plans.short_description = "Equal Installment With Changeable Interest Rate Plans"
