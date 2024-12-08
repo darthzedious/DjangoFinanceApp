@@ -11,26 +11,6 @@ from financeDjango.personal_actions_app.models import FinancialGoal, Budget
 
 UserModel = get_user_model()
 
-# def login_view(request):
-#     if request.method == "POST":
-#         form = LoginForm(request, data=request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data.get('username')
-#             password = form.cleaned_data.get('password')
-#             user = authenticate(request, username=username, password=password)
-#             if user is not None:
-#                 login(request, user)
-#                 return redirect('profile')  # redirect to homepage after successful login
-#             else:
-#                 messages.error(request, "Invalid username or password")
-#     else:
-#         form = LoginForm()
-#
-#     context = {
-#         'form': form,
-#     }
-#     return render(request, 'accounts_templates/log_in.html', context)
-
 class UserLoginView(LoginView):
     template_name = 'accounts_templates/log_in.html'
     form_class = LoginForm
@@ -38,21 +18,6 @@ class UserLoginView(LoginView):
     def get_success_url(self):
         return reverse('profile-details', kwargs={'pk': self.request.user.pk})
 
-# def register_view(request):
-#     if request.method == "POST":
-#         form = RegisterForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             return redirect('profile')  # redirect to homepage after successful registration
-#     else:
-#         form = RegisterForm()
-#
-#     context = {
-#         'form': form,
-#     }
-#
-#     return render(request, 'accounts_templates/register.html', context)
 
 class UserRegisterView(CreateView):
     model = UserModel

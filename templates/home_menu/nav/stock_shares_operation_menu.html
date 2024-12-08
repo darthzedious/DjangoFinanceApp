@@ -1,55 +1,35 @@
 {% load auth_tag %}
 
 <ol>
-        <li>
-{#           The first one is an example without custom authentication tag#}
-        
-            <a class="dropdown-item"
-                    {% if user.is_authenticated %}
-                        href="{% url 'preference_shares' %}"
-                    {% else %}
-                        href="{% url 'login' %}"
-                    {% endif %}>Calculate Preference Shares Price</a>
-        </li>
-        
-        <li>
-            <a class="dropdown-item"
-               href="{% auth_url user 'ordinary_shares' %}"
-            >Calculate Ordinary Shares Price</a>
-        </li>
-    
-        <li>
-            <a class="dropdown-item"
-               href="{% auth_url user 'return_on_equity' %}"
-            >Calculate Return on Equity</a>
-        </li>
-        <li>
-            <a class="dropdown-item"
-               href="{% auth_url user 'growth_rate' %}"
-            >Calculate Dividend Growth Rate</a>
-        </li>
-        <li>
-            <a class="dropdown-item"
-               href="{% auth_url user 'stock_data' %}"
-            >Search live stock data</a>
-        </li>
-        <li>
-            <a class="dropdown-item"
-               href="{% auth_url user 'stock_price' %}"
-            >Search live stock prices</a>
-        </li>
-        <li>
-            <a class="dropdown-item"
-               href="{% auth_url user 'top_10_stocks' %}"
-            > Search top 10 stocks</a>
-        </li>
+    <li>
+        {#           The first one is an example without custom authentication tag#}
+
+        <a class="dropdown-item"
+                {% if user.is_authenticated %}
+           href="{% url 'preference_shares' %}"
+                {% else %}
+           href="{% url 'login' %}"
+                {% endif %}>Calculate Preference Shares Price</a>
+    </li>
+
     <li>
         <a class="dropdown-item"
-           href="{% auth_url user 'calculate_beta' %}"
-        >Calculate beta coefficient</a>
+           href="{% auth_url user 'ordinary_shares' %}"
+        >Calculate Ordinary Shares Price</a>
+    </li>
+
+    <li>
+        <a class="dropdown-item"
+           href="{% auth_url user 'return_on_equity' %}"
+        >Calculate Return on Equity</a>
     </li>
     <li>
-        <a class="dropdown-item" 
+        <a class="dropdown-item"
+           href="{% auth_url user 'growth_rate' %}"
+        >Calculate Dividend Growth Rate</a>
+    </li>
+    <li>
+        <a class="dropdown-item"
            href="{% auth_url user 'calculate_capm' %}"
         >Calculate Capital Asset Pricing Model</a>
     </li>
