@@ -1,0 +1,70 @@
+{% extends 'home_menu/home.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Your Repayment Plans</h2>
+
+        {% if plans %}
+            {% for plan in plans %}
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h4>Repayment Plan {{ plan.id }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Borrowed Amount:</strong> {{ plan.borrowed_amount }}</p>
+                        <p><strong>Interest Rate:</strong> {{ plan.interest_rate }}%</p>
+                        <p><strong>Periods:</strong> {{ plan.periods }}</p>
+
+                        {% if request.user == plan.user %}
+                            <a href="{% url 'edit-equal-installment' plan.pk %}" class="btn btn-success btn-sm">
+                                Edit
+                            </a>
+                            <a href="{% url 'delete-equal-installment' plan.pk %}" class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+                        {% else %}
+                            <span class="text-muted">No Actions Available</span>
+                        {% endif %}
+
+                        {% if plan.repayment %}
+                            <h5 class="mt-3">Repayment Table</h5>
+                            <table class="table table-striped table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Period</th>
+                                        <th>Installment Amount (C)</th>
+                                        <th>Interest Portion (IP)</th>
+                                        <th>Principal Portion (PP)</th>
+                                        <th>Remaining Principal (RP)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in plan.repayment_table %}
+                                        <tr>
+                                            <td>{{ row.n }}</td>
+                                            <td>{{ row.C }}</td>
+                                            <td>{{ row.IP }}</td>
+                                            <td>{{ row.PP }}</td>
+                                            <td>{{ row.RP }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p class="text-muted">No repayment data available for this plan.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <!-- Pagination controls -->
+            <div class="text-center">
+                {% include 'personal_actions_templates/pagination.html' %}
+            </div>
+        {% else %}
+            <p>No repayment plans found.</p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
