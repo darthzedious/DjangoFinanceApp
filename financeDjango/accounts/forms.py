@@ -24,6 +24,13 @@ class ProfileEditForm(PlaceholderMixin, forms.ModelForm):
         model = Profile
         exclude = ('user', )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['profile_picture'].widget.attrs.update({
+             'placeholder': 'Profile picture URL'
+        })
+
+
 class LoginForm(PlaceholderMixin, AuthenticationForm):
     username = forms.CharField(
         label="Username or Email",
