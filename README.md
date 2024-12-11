@@ -53,4 +53,22 @@ pip install -r requirements.txt
 ```
 
 ### Step 4: Set Up the Database
+**Update Django settings.py**
 
+
+Edit the DATABASES configuration in your Django project to use PostgreSQL:
+
+```python
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '',  # Your Database name
+        'USER': '',    # Your Database user
+        'PASSWORD': '',  # Your User's password
+        'HOST': 'localhost',  # Database host
+        'PORT': '5432',     # Database port (default is 5432)
+    }
+}
+```
+https://docs.djangoproject.com/en/5.1/ref/settings/#databases
