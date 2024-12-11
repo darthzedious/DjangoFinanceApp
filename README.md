@@ -17,3 +17,19 @@ First, clone the repository to your local machine:
 ```bash
 git clone <repository-url>
 cd <repository-directory>
+```
+
+ ## Step 2 :Environment Setup
+
+**To set up the project, you'll need a virtual environment.**
+
+**On Windows**
+
+Open Command Prompt and create a virtual environment:
+```bash
+python -m venv venv
+```
+Activate the virtual environment:
+```bash
+venv\Scripts\activate
+```
