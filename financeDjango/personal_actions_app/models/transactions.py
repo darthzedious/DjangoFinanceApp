@@ -4,7 +4,6 @@ from financeDjango.personal_actions_app.choices import TransactionTypes
 
 UserModel = get_user_model()
 
-
 class Transaction(models.Model):
     user = models.ForeignKey(
         to=UserModel,

@@ -4,7 +4,6 @@ from django.db import models
 
 UserModel = get_user_model()
 
-
 class BaseEqualCPPPlan(models.Model):
     class Meta:
         abstract = True
