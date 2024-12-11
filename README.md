@@ -99,3 +99,38 @@ Run the server with the following command:
 python manage.py runserver
 ```
 By default, the server runs on http://127.0.0.1:8000/.
+
+## Key parts
+
+- **Models**
+  - AppUser, Profile, Budget, FinancialGoal, InvestmentPortfolio, Transaction, EqualInstallmentPlan, EqualPrincipalPortionPlan, EqualInstallmentChangeableIPPlan
+- **Forms**
+  -  Forms for user creation and actions create, update, delete
+- **Mixins**
+  - OperationNameContextMixin, DisabledReadonlyMixin, PlaceholderMixin, CreateActionFormValidMixin, AdminAddFieldSetMixin, RepaymentJSONContextToTableMixin
+- **Helpers**
+  - Every calculation related app has a **helpers.py** with complex formulas used in the views to calculate the result
+- **Admin**
+    - All the models are registered in the admin pannel
+    - There are three levels of administration: superuser, staff, moderator 
+
+## Concept
+
+**User Registration**:
+- Users must register to access features such as stock operations, repayment plan calculations, and financial formula evaluations (e.g., discount factors, future values).
+
+**Repayment Plans**:
+
+- After submitting the required details, the user receives a repayment plan in a structured table format, detailing installment amounts, interest portions, principal portions, and remaining principal for each period. Users can save these plans in their profiles for later review, editing, or deletion.
+
+**Profile Features**:
+
+Users can:
+
+- Track personal spending, budgets, and income.
+- Use all available financial calculations.
+- Access only their own saved data, ensuring privacy. Attempts to access other users' data redirect them to their profile.
+
+
+
+
