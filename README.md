@@ -72,3 +72,30 @@ DATABASES = {
 }
 ```
 https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+
+### Step 5: Apply Migrations
+
+Run Django migrations to create the necessary database tables:
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+### Step 5: Create a Superuser
+
+To access the admin panel, create a superuser account:
+
+```bash
+  python manage.py createsuperuser
+```
+Follow the prompts to set up the superuser credentials.
+
+### Step 6: Run the Server
+
+Run the server with the following command:
+
+```bash
+python manage.py runserver
+```
+By default, the server runs on http://127.0.0.1:8000/.
