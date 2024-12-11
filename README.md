@@ -102,17 +102,30 @@ By default, the server runs on http://127.0.0.1:8000/.
 
 ## Key parts
 
-- **Models**
-  - AppUser, Profile, Budget, FinancialGoal, InvestmentPortfolio, Transaction, EqualInstallmentPlan, EqualPrincipalPortionPlan, EqualInstallmentChangeableIPPlan
+- Models:
+  - AppUser: Custom user model.
+  - Profile: Contains user-specific details like budgets, financial goals, and income tracking.
+  - Budget: Tracks individual user budgets.
+  - FinancialGoal: Represents specific goals users set for financial planning.
+  - InvestmentPortfolio: Tracks investments managed by the user.
+  - Transaction: Logs financial transactions.
+  - EqualInstallmentPlan, EqualPrincipalPortionPlan, EqualInstallmentChangeableIPPlan: Models for managing different types of repayment plans.
 - **Forms**
-  -  Forms for user creation and actions create, update, delete
+  -  Includes forms for creating, updating, and deleting user data. 
 - **Mixins**
-  - OperationNameContextMixin, DisabledReadonlyMixin, PlaceholderMixin, CreateActionFormValidMixin, AdminAddFieldSetMixin, RepaymentJSONContextToTableMixin
+  - OperationNameContextMixin: Adds dynamic context for operation-specific views.
+  - DisabledReadonlyMixin: Used to make fields or forms read-only.
+  - PlaceholderMixin: Dynamically adds placeholders to forms for better UX.
+  - CreateActionFormValidMixin: Handles successful form submissions during creation.
+  - AdminAddFieldSetMixin: Customizes field sets for the admin interface.
+  - RepaymentJSONContextToTableMixin: Converts repayment JSON into a structured table format.
 - **Helpers**
-  - Every calculation related app has a **helpers.py** with complex formulas used in the views to calculate the result
+  - Each app includes a **helpers.py** file for complex financial formulas, encapsulating some of the the business logic used in views.
 - **Admin**
-    - All the models are registered in the admin pannel
-    - There are three levels of administration: superuser, staff, moderator 
+    - All models are registered in the admin panel with three levels of administration:
+      - Superuser
+      - Staff
+      -  Moderator 
 
 ## Concept
 
