@@ -19,7 +19,7 @@ git clone <repository-url>
 cd <repository-directory>
 ```
 
- ## Step 2 :Environment Setup
+### Step 2: Environment Setup
 
 **To set up the project, you'll need a virtual environment.**
 
@@ -33,3 +33,24 @@ Activate the virtual environment:
 ```bash
 venv\Scripts\activate
 ```
+**On macOS/Linux**
+
+Open Terminal and create a virtual environment:
+```bash
+python3 -m venv venv
+```
+Activate the virtual environment:
+```bash
+source venv/bin/activate
+```
+### Step 3: Environment Setup
+**Installing Requirements**
+
+Once the virtual environment is activated, install the dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+### Step 4: Set Up the Database
+
