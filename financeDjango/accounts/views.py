@@ -16,7 +16,12 @@ class UserLoginView(LoginView):
     form_class = LoginForm
 
     def get_success_url(self):
-        return reverse('profile-details', kwargs={'pk': self.request.user.pk})
+        return reverse(
+            'profile-details',
+            kwargs={
+                'pk': self.request.user.pk
+            },
+        )
 
 
 class UserRegisterView(CreateView):
@@ -27,7 +32,10 @@ class UserRegisterView(CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        login(self.request, self.object, backend='financeDjango.accounts.authentication.EmailOrUsernameBackend')
+        login(self.request,
+              self.object,
+              backend='financeDjango.accounts.authentication.EmailOrUsernameBackend'
+              )
 
         return response
 
@@ -44,7 +52,9 @@ class LoadProfile(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['biggest_goal'] = (FinancialGoal.objects.filter(user=self.request.user)
                                    .order_by('-target_amount', '-deadline').first())
-        context['latest_budget'] = Budget.objects.filter(user=self.request.user).order_by('start_date').first()
+        context['latest_budget'] = (Budget.objects.filter(user=self.request.user)
+                                    .order_by('start_date').first())
+
         return context
 
 class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -53,7 +63,10 @@ class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'accounts_templates/profile-edit.html'
 
     def test_func(self):
-        profile = get_object_or_404(Profile, pk=self.kwargs['pk'])
+        profile = get_object_or_404(
+            Profile,
+            pk=self.kwargs['pk']
+        )
         return self.request.user == profile.user
 
     def get_success_url(self):

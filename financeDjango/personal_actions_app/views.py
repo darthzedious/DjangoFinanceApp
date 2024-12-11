@@ -5,7 +5,8 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
 from financeDjango.mixins import CreateActionFormValidMixin, OperationNameContextMixin
 from financeDjango.personal_actions_app.forms import TransactionForm, PortfolioForm, BudgetForm, GoalForm, \
-    BudgetDeleteForm, GoalDeleteForm, PortfolioDeleteForm, TransactionDeleteForm
+    BudgetDeleteForm, GoalDeleteForm, PortfolioDeleteForm, TransactionDeleteForm, TransactionEditForm, \
+    PortfolioEditForm, BudgetEditForm, GoalEditForm
 from financeDjango.personal_actions_app.models import Transaction, InvestmentPortfolio, Budget, FinancialGoal
 
 
@@ -28,12 +29,13 @@ class TransactionListView(LoginRequiredMixin, ListView):
 
 class TransactionEditView(LoginRequiredMixin, UserPassesTestMixin,  UpdateView):
     model = Transaction
-    form_class = TransactionForm
+    form_class = TransactionEditForm
     template_name = 'personal_actions_templates/edit_action.html'
     success_url = reverse_lazy('show-transactions')
 
     def test_func(self):
         transaction = get_object_or_404(Transaction, pk=self.kwargs['pk'])
+
         return self.request.user == transaction.user
 
 class TransactionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -44,6 +46,7 @@ class TransactionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView)
 
     def test_func(self):
         transaction = get_object_or_404(Transaction, pk=self.kwargs['pk'])
+
         return self.request.user == transaction.user
 
     def get_initial(self):
@@ -76,12 +79,13 @@ class PortfolioListView(LoginRequiredMixin, ListView):
 
 class PortfolioEditView(LoginRequiredMixin, UserPassesTestMixin,  UpdateView):
     model = InvestmentPortfolio
-    form_class = PortfolioForm
+    form_class = PortfolioEditForm
     template_name = 'personal_actions_templates/edit_action.html'
     success_url = reverse_lazy('show-portfolio')
 
     def test_func(self):
         portfolio = get_object_or_404(InvestmentPortfolio, pk=self.kwargs['pk'])
+
         return self.request.user == portfolio.user
 
 class PortfolioDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -92,6 +96,7 @@ class PortfolioDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         portfolio = get_object_or_404(InvestmentPortfolio, pk=self.kwargs['pk'])
+
         return self.request.user == portfolio.user
 
     def get_initial(self):
@@ -123,13 +128,14 @@ class BudgetListView(LoginRequiredMixin, ListView):
 
 class BudgetEditView(LoginRequiredMixin, UserPassesTestMixin,  UpdateView):
     model = Budget
-    form_class = BudgetForm
+    form_class = BudgetEditForm
     template_name = 'personal_actions_templates/edit_action.html'
     success_url = reverse_lazy('show-budgets')
 
     def test_func(self):
         # Check if the user owns the budget
         budget = get_object_or_404(Budget, pk=self.kwargs['pk'])
+
         return self.request.user == budget.user
 
 class BudgetDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -140,6 +146,7 @@ class BudgetDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         budget = get_object_or_404(Budget, pk=self.kwargs['pk'])
+
         return self.request.user == budget.user
 
     def get_initial(self):
@@ -171,13 +178,14 @@ class GoalListView(LoginRequiredMixin, ListView):
 
 class GoalEditView(LoginRequiredMixin, UserPassesTestMixin,  UpdateView):
     model = FinancialGoal
-    form_class = GoalForm
+    form_class = GoalEditForm
     template_name = 'personal_actions_templates/edit_action.html'
     success_url = reverse_lazy('show-goals')
 
     def test_func(self):
         # Check if the user owns the budget
         goal = get_object_or_404(FinancialGoal, pk=self.kwargs['pk'])
+
         return self.request.user == goal.user
 
 class GoalDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -188,6 +196,7 @@ class GoalDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         goal = get_object_or_404(FinancialGoal, pk=self.kwargs['pk'])
+
         return self.request.user == goal.user
 
     def get_initial(self):

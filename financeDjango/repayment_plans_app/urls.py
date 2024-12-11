@@ -10,6 +10,7 @@ urlpatterns = [
         path('edit/', views.EqualInstallmentEditView.as_view(), name='edit-equal-installment'),
         path('delete/', views.EqualInstallmentDeleteView.as_view(), name='delete-equal-installment'),
     ])),
+
     path('equal-pp-calculation/', views.EqualPPPlanCalculateView.as_view(),
          name='equal-pp-calculation'),
     path('equal-pp-save/', views.EqualPPPlanSaveView.as_view(), name='equal-pp-save'),
@@ -19,6 +20,7 @@ urlpatterns = [
         path('edit/', views.EqualPPPlanEditView.as_view(), name='edit-equal-pp'),
         path('delete/', views.EqualPPPlanDeleteView.as_view(), name='delete-equal-pp'),
     ])),
+
     path('equal-installment-changeable-ip-calculation/', views.EqualInstallmentChangeableIpCalculateView.as_view(),
          name='equal-installment-changeable-ip-calculation'),
     path('equal-installment-changeable-ip-save/', views.EqualInstallmentChangeableIpSaveView.as_view(),

@@ -27,6 +27,8 @@ class TransactionForm(forms.ModelForm):
 class TransactionDeleteForm(DisabledReadonlyMixin, TransactionForm):
     pass
 
+class TransactionEditForm(TransactionForm):
+    pass
 
 class PortfolioForm(forms.ModelForm):
     class Meta:
@@ -45,6 +47,9 @@ class PortfolioForm(forms.ModelForm):
         }
 
 class PortfolioDeleteForm(DisabledReadonlyMixin, PortfolioForm):
+    pass
+
+class PortfolioEditForm(PortfolioForm):
     pass
 
 class BudgetForm(forms.ModelForm):
@@ -73,6 +78,9 @@ class BudgetForm(forms.ModelForm):
 class BudgetDeleteForm(DisabledReadonlyMixin, BudgetForm):
     pass
 
+class BudgetEditForm(BudgetForm):
+    pass
+
 class GoalForm(forms.ModelForm):
     class Meta:
         model = FinancialGoal
@@ -96,5 +104,9 @@ class GoalForm(forms.ModelForm):
                 'placeholder': 'Choose the deadline date...',
             }),
         }
+
 class GoalDeleteForm(DisabledReadonlyMixin, GoalForm):
+    pass
+
+class GoalEditForm(GoalForm):
     pass

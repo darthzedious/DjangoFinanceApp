@@ -6,39 +6,39 @@
         <h2 class="text-center">Your Transactions</h2>
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
-                <tr>
-                    <th>Type</th>
-                    <th>Amount</th>
-                    <th>Description</th>
-                    <th>Date</th>
-                    <th>Actions</th>
-                </tr>
+            <tr>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
             </thead>
             <tbody>
-                {% for transaction in transactions %}
-                    <tr>
-                        <td>{{ transaction.type }}</td>
-                        <td>{{ transaction.amount }}</td>
-                        <td>{{ transaction.description }}</td>
-                        <td>{{ transaction.date }}</td>
-                        <td>
-                            {% if request.user == transaction.user %}
-                                <a href="{% url 'edit-transaction' transaction.pk %}" class="btn btn-success btn-sm">
-                                    Edit
-                                </a>
-                                <a href="{% url 'delete-transaction' transaction.pk %}" class="btn btn-danger btn-sm">
-                                    Delete
-                                </a>
-                            {% else %}
-                                <span class="text-muted">No Actions Available</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="5" class="text-center">No transactions found.</td>
-                    </tr>
-                {% endfor %}
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.type }}</td>
+                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.description }}</td>
+                    <td>{{ transaction.date }}</td>
+                    <td>
+                        {% if request.user == transaction.user %}
+                            <a href="{% url 'edit-transaction' transaction.pk %}" class="btn btn-success btn-sm">
+                                Edit
+                            </a>
+                            <a href="{% url 'delete-transaction' transaction.pk %}" class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+                        {% else %}
+                            <span class="text-muted">No Actions Available</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No transactions found.</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
 

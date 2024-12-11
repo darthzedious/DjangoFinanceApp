@@ -13,9 +13,11 @@ class PreferenceSharesPrice(OperationNameContextMixin, FormView):
     def form_valid(self, form):
         dividends = form.cleaned_data['dividends']
         rate_of_return = form.cleaned_data['rate_of_return']
+
         result = helpers.calculate_preference_shares_price(dividends, rate_of_return)
 
         context = self.get_context_data(result=result, form=form)
+
         return self.render_to_response(context)
 
 class OrdinarySharesPrice(OperationNameContextMixin, FormView):
@@ -27,9 +29,11 @@ class OrdinarySharesPrice(OperationNameContextMixin, FormView):
         dividend = form.cleaned_data['dividends']
         rate_of_return = form.cleaned_data['rate_of_return']
         growth_rate = form.cleaned_data['growth_rate']
+
         result = helpers.calculate_ordinary_shares_price(dividend, rate_of_return, growth_rate)
 
         context = self.get_context_data(result=result, form=form)
+
         return self.render_to_response(context)
 
 
@@ -41,9 +45,11 @@ class ReturnOnEquity(OperationNameContextMixin, FormView):
     def form_valid(self, form):
         net_profit = form.cleaned_data['net_profit']
         equity_capital = form.cleaned_data['equity_capital']
+
         result = helpers.calculate_return_on_equity(net_profit, equity_capital)
 
         context = self.get_context_data(result=result, form=form)
+
         return self.render_to_response(context)
 
 
@@ -61,9 +67,11 @@ class GrowthRateOfDividends(OperationNameContextMixin, FormView):
         net_profit = form.cleaned_data['net_profit']
         equity_capital = form.cleaned_data['equity_capital']
         ki = form.cleaned_data['retention_ratio']
+
         result = helpers.calculate_growth_rate_of_dividends(net_profit, equity_capital, ki)
 
         context = self.get_context_data(result=result, form=form)
+
         return self.render_to_response(context)
 
 class CalculateCAPM(OperationNameContextMixin, FormView):
@@ -75,7 +83,9 @@ class CalculateCAPM(OperationNameContextMixin, FormView):
         risk_free_rate = form.cleaned_data['risk_free_rate']
         market_return = form.cleaned_data['market_return']
         beta_coefficient = form.cleaned_data['beta_coefficient']
+
         result = helpers.calculate_cpam(risk_free_rate, market_return, beta_coefficient)
 
         context = self.get_context_data(result=result, form=form)
+
         return self.render_to_response(context)

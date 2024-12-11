@@ -8,9 +8,21 @@ class FinancialGoal(models.Model):
         on_delete=models.CASCADE,
         related_name='goals',
     )
-    title = models.CharField(max_length=100)
-    target_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    saved_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    title = models.CharField(
+        max_length=100,
+    )
+
+    target_amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    saved_amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+
     deadline = models.DateField()
 
     def __str__(self):

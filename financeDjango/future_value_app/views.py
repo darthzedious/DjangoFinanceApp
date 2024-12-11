@@ -15,9 +15,11 @@ class FutureValueSimpleInterest(LoginRequiredMixin, OperationNameContextMixin, F
         present_value = form.cleaned_data['present_value']
         interest_rate = form.cleaned_data['interest_rate']
         number_of_periods = form.cleaned_data['number_of_periods']
+
         result = future_value_simple_interest(present_value, interest_rate, number_of_periods)
 
         context = self.get_context_data(result=result, form=form)
+
         return self.render_to_response(context)
 
 class FutureValueCompoundInterest(LoginRequiredMixin, OperationNameContextMixin, FormView):
@@ -29,7 +31,9 @@ class FutureValueCompoundInterest(LoginRequiredMixin, OperationNameContextMixin,
         present_value = form.cleaned_data['present_value']
         interest_rate = form.cleaned_data['interest_rate']
         number_of_periods = form.cleaned_data['number_of_periods']
+
         result = future_value_compound_interest(present_value, interest_rate, number_of_periods)
 
         context = self.get_context_data(result=result, form=form)
+
         return self.render_to_response(context)

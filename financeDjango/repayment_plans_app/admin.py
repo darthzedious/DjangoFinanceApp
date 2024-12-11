@@ -14,7 +14,12 @@ class AdminEqualInstallmentPlan(AdminAddFieldSetMixin, admin.ModelAdmin):
     list_per_page = 15
 
     fieldsets = (
-        ('Edit Repayment Plan', {'fields': ('user', 'borrowed_amount', 'interest_rate', 'periods', )}),
+        (
+            'Edit Repayment Plan',
+            {
+                'fields': ('user', 'borrowed_amount', 'interest_rate', 'periods', )
+            }
+        ),
     )
 
     add_fieldsets = (
@@ -36,7 +41,12 @@ class AdminEqualPrincipalPortionPlan(AdminAddFieldSetMixin, admin.ModelAdmin):
     list_per_page = 15
 
     fieldsets = (
-        ('Edit Repayment Plan', {'fields': ('user', 'borrowed_amount', 'interest_rate', 'periods',)}),
+        (
+            'Edit Repayment Plan',
+            {
+                'fields': ('user', 'borrowed_amount', 'interest_rate', 'periods',)
+            }
+        ),
     )
 
     add_fieldsets = (
@@ -61,9 +71,14 @@ class AdminEqualInstallmentChangeableIPPlan(AdminAddFieldSetMixin, admin.ModelAd
     list_per_page = 15
 
     fieldsets = (
-        ('Edit Repayment Plan', {'fields': ('user', 'borrowed_amount',
+        (
+            'Edit Repayment Plan',
+            {
+                'fields': ('user', 'borrowed_amount',
                            'interest_rate_first_period','interest_rate_second_period',
-                           'first_period', 'second_period',)}),
+                           'first_period', 'second_period',)
+            }
+        ),
     )
 
     add_fieldsets = (

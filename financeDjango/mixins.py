@@ -8,6 +8,7 @@ class OperationNameContextMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['operation_name'] = self.operation_name
+
         return context
 
 class DisabledReadonlyMixin:
@@ -37,8 +38,10 @@ class CreateActionFormValidMixin:
 
 class AdminAddFieldSetMixin:
     def get_fieldsets(self, request, obj=None):
+
         if obj is None: # If object is not already created return add_fieldsets
             return self.add_fieldsets
+
         return super().get_fieldsets(request, obj)
 
 

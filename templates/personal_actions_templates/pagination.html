@@ -1,7 +1,7 @@
 {% load static %}
 
-    <div class="pagination-container">
-        <div class="pagination">
+<div class="pagination-container">
+    <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
                     <a href="?page=1" class="page-link">&laquo; First</a>
@@ -10,11 +10,11 @@
                     <span class="disabled page-link">&laquo; First</span>
                     <span class="disabled page-link">Previous</span>
                 {% endif %}
-        
+
                 <span class="current-page">
                     Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
                 </span>
-        
+
                 {% if page_obj.has_next %}
                     <a href="?page={{ page_obj.next_page_number }}" class="page-link">Next</a>
                     <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">Last &raquo;</a>
@@ -22,7 +22,7 @@
                     <span class="disabled page-link">Next</span>
                     <span class="disabled page-link">Last &raquo;</span>
 
-            </span>
-        </div>
-    </div>
-{% endif %}
+                    </span>
+                    </div>
+                    </div>
+                {% endif %}

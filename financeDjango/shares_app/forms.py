@@ -38,16 +38,20 @@ class BaseROEGrowthRateForm(forms.Form):
 
     def clean_equity_capital(self):
         equity_capital = self.cleaned_data.get('equity_capital')
+
         if equity_capital == 0.0:
             raise ValidationError('Equity capital cannot be zero.')
+
         return equity_capital
 
 
 class PreferencesSharesForm(BaseSharesForm):
    def clean_rate_of_return(self):
        rate_of_return = self.cleaned_data.get('rate_of_return')
+
        if rate_of_return == 0.0:
            raise ValidationError("Rate of return cannot be zero.")
+
        return rate_of_return
 
 
@@ -62,6 +66,7 @@ class OrdinarySharesForm(BaseSharesForm):
 
     def clean(self):
         cleaned_data = super().clean()
+
         rate_of_return = cleaned_data.get('rate_of_return')
         growth_rate = cleaned_data.get('growth_rate')
 

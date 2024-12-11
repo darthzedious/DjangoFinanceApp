@@ -14,7 +14,12 @@ class BudgetAdmin(AdminAddFieldSetMixin, admin.ModelAdmin):
     list_per_page = 15
 
     fieldsets = (
-        ('Edit Budget', {'fields': ('user', 'category', 'amount', 'start_date', 'end_date')}),
+        (
+            'Edit Budget',
+            {
+                'fields': ('user', 'category', 'amount', 'start_date', 'end_date')
+            }
+        ),
     )
 
     add_fieldsets = (
@@ -37,7 +42,12 @@ class FinancialGoalAdmin(AdminAddFieldSetMixin, admin.ModelAdmin):
     list_per_page = 15
 
     fieldsets = (
-        ('Edit Goal', {'fields': ('user', 'title', 'target_amount', 'saved_amount', 'deadline')}),
+        (
+            'Edit Goal',
+            {
+                'fields': ('user', 'title', 'target_amount', 'saved_amount', 'deadline')
+             }
+        ),
     )
 
     add_fieldsets = (
@@ -60,7 +70,12 @@ class InvestmentPortfolioAdmin(AdminAddFieldSetMixin, admin.ModelAdmin):
     list_per_page = 15
 
     fieldsets = (
-        ('Edit Goal', {'fields': ('user', 'name', 'description', )}),
+        (
+            'Edit Goal',
+            {
+                'fields': ('user', 'name', 'description', )
+            }
+        ),
     )
 
     add_fieldsets = (
@@ -82,7 +97,12 @@ class TransactionAdmin(AdminAddFieldSetMixin, admin.ModelAdmin):
     list_per_page = 15
 
     fieldsets = (
-        ('Edit Goal', {'fields': ('user', 'type', 'amount', 'description',)}),
+        (
+            'Edit Goal',
+            {
+                'fields': ('user', 'type', 'amount', 'description',)
+            }
+        ),
     )
 
     add_fieldsets = (
