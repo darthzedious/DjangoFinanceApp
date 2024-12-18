@@ -21,7 +21,7 @@ pandas==2.2.3
 peewee==3.17.6
 pillow==10.4.0
 platformdirs==4.3.6
-psycopg2==2.9.9
+psycopg2-binary==2.9.10
 pyparsing==3.1.4
 python-dateutil==2.9.0.post0
 pytz==2024.2
