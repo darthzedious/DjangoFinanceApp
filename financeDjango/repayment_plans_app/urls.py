@@ -31,4 +31,16 @@ urlpatterns = [
         path('edit/', views.EqualInstallmentChangeableIpEditView.as_view(), name='edit-equal-installment-changeable-ip'),
         path('delete/', views.EqualInstallmentChangeableIpDeleteView.as_view(), name='delete-equal-installment-changeable-ip'),
     ])),
+
+path('equal-pp-changeable-ip-calculation/', views.EqualPrincipalPortionChangeableIPCalculateView.as_view(),
+     name='equal-pp-changeable-ip-calculation'),
+path('equal-pp-changeable-ip-save', views.EqualPrincipalPortionChangeableIPSaveView.as_view(),
+     name='equal-pp-changeable-ip-save'),
+path('equal-pp-changeable-ip-list', views.EqualPrincipalPortionChangeableIPListView.as_view(),
+     name='equal-pp-changeable-ip-list'),
+path('equal-pp-changeable-ip/<int:pk>/', include([
+    path('edit/', views.EqualPrincipalPortionChangeableIPEditView.as_view(), name='edit-equal-pp-changeable-ip'),
+    path('delete/', views.EqualPrincipalPortionChangeableIPDeleteView.as_view(), name='delete-equal-pp-changeable-ip'),
+    ])),
+
 ]

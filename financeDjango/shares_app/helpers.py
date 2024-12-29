@@ -67,3 +67,4 @@ def calculate_cpam(risk_free_rate, market_return, beta_coefficient):
             float: The expected return of the asset based on CAPM.
         """
     return risk_free_rate + beta_coefficient * (market_return - risk_free_rate)
+

@@ -94,3 +94,9 @@ class EqualInstallmentChangeableIPDeleteForm(DisabledReadonlyMixin, EqualInstall
 class EqualPrincipalPortionChangeableIPForm(BaseChangeableIPForm):
     class Meta(BaseChangeableIPForm.Meta):
         model = EqualPrincipalPortionChangeableIPPlan
+
+class EqualPrincipalPortionChangeableIPEditForm(EqualPrincipalPortionChangeableIPForm):
+    pass
+
+class EqualPrincipalPortionChangeableIPDeleteForm(DisabledReadonlyMixin, EqualPrincipalPortionChangeableIPForm):
+    pass
