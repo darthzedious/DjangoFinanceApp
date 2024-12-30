@@ -8,5 +8,6 @@ urlpatterns = [
     path('future-value/', views.future_value_menu, name='future-value-menu'),
     path('discount-factor/', views.discount_factor_menu, name='discount-factor-menu'),
     path('repayment_plans/', views.repayment_plans_menu, name='repayment_plans_menu'),
+    path('annuity_factor/', views.annuity_factor_menu, name='annuity_factor_menu'),
 
 ]

@@ -94,6 +94,34 @@
                         </ul>
                     </li>
 
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{% url 'annuity_factor_menu' %}" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Annuity Factor
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            {% include 'home_menu/nav/annuity_factor_nav.html' %}
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{% url 'discount-factor-menu' %}" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Bonds
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            {% include 'home_menu/nav/discount_factor_nav.html' %}
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                        </ul>
+                    </li>
+
 
                     {#        <form class="d-flex mt-3" role="search">#}
                     {#          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">#}

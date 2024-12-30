@@ -15,3 +15,6 @@ def discount_factor_menu(request):
 
 def repayment_plans_menu(request):
     return render(request, 'home_menu/nav/repayment_plans_nav.html')
+
+def annuity_factor_menu(request):
+    return render(request, 'home_menu/nav/annuity_factor_nav.html')
