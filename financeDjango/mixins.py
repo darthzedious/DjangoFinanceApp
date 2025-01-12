@@ -1,8 +1,6 @@
 import ast
 import json
 
-from financeDjango.annuity_factor_app.helpers import calculate_future_value_annuity_factor_end_year_payment
-
 
 class OperationNameContextMixin:
     operation_name = ''
