@@ -18,3 +18,6 @@ def repayment_plans_menu(request):
 
 def annuity_factor_menu(request):
     return render(request, 'home_menu/nav/annuity_factor_nav.html')
+
+def bonds_menu(request):
+    return render(request, 'home_menu/nav/bonds_nav.html')

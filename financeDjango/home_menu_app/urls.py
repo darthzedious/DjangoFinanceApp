@@ -9,5 +9,5 @@ urlpatterns = [
     path('discount-factor/', views.discount_factor_menu, name='discount-factor-menu'),
     path('repayment_plans/', views.repayment_plans_menu, name='repayment_plans_menu'),
     path('annuity_factor/', views.annuity_factor_menu, name='annuity_factor_menu'),
-
+    path('bonds/', views.bonds_menu, name='bonds_menu'),
 ]
