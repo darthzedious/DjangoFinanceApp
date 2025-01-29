@@ -46,3 +46,13 @@ class CouponBondYieldToMaturityForm(BondsYieldToMaturityForm):
             'placeholder': 'If provided, indicates the payment period (e.g., 6 for semi-annual).'
         })
     )
+
+    coupon_rate = forms.DecimalField(
+        required=True,
+        max_digits=10,
+        decimal_places=2,
+        widget=forms.NumberInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Annual coupon rate (e.g., 0.05 for 5%).',
+        })
+    )
