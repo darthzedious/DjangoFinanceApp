@@ -228,13 +228,13 @@ class EqualInstallmentChangeableIpCalculateView(LoginRequiredMixin, OperationNam
             borrowed_amount = form.cleaned_data['borrowed_amount']
             interest_rate_first_period = form.cleaned_data['interest_rate_first_period']
             interest_rate_second_period = form.cleaned_data['interest_rate_second_period']
-            first_period = form.cleaned_data['first_period']
+            number_of_periods = form.cleaned_data['number_of_periods']
             second_period = form.cleaned_data['second_period']
 
             repayment = calculate_equal_installment_changeable_ip_repayment_plan(borrowed_amount,
                                                                                  interest_rate_first_period,
                                                                                  interest_rate_second_period,
-                                                                                 first_period,
+                                                                                 number_of_periods,
                                                                                  second_period,
                                                                                  )
             print(repayment)
@@ -249,18 +249,24 @@ class EqualInstallmentChangeableIpCalculateView(LoginRequiredMixin, OperationNam
             borrowed_amount=borrowed_amount,
             interest_rate_first_period=interest_rate_first_period,
             interest_rate_second_period=interest_rate_second_period,
-            first_period=first_period,
+            number_of_periods=number_of_periods,
             second_period=second_period,
         ))
 
 
 class EqualInstallmentChangeableIpSaveView(LoginRequiredMixin,  CreateActionFormValidMixin, CreateView):
     model = EqualInstallmentChangeableIPPlan
-    fields = ['borrowed_amount', 'interest_rate_first_period', 'interest_rate_second_period', 'first_period',
+    fields = ['borrowed_amount', 'interest_rate_first_period', 'interest_rate_second_period', 'number_of_periods',
               'second_period', 'repayment']
     success_url = reverse_lazy('equal-installment-changeable-ip-calculation')
 
-
+    # def form_valid(self, form):
+    #     # Check if the form is valid and the model is being saved
+    #     instance = form.save()  # Save the instance
+    #     print(f"Saved instance: {instance}")  # Ensure the instance is saved
+    #
+    #     # Return the response after saving
+    #     return super().form_valid(form)
 
 class EqualInstallmentChangeableIpListView(LoginRequiredMixin, RepaymentJSONContextToTableMixin, ListView):
     model = EqualInstallmentChangeableIPPlan
@@ -290,13 +296,13 @@ class EqualInstallmentChangeableIpEditView(LoginRequiredMixin, UserPassesTestMix
         borrowed_amount = form.cleaned_data['borrowed_amount']
         interest_rate_first_period = form.cleaned_data['interest_rate_first_period']
         interest_rate_second_period = form.cleaned_data['interest_rate_second_period']
-        first_period = form.cleaned_data['first_period']
+        number_of_periods = form.cleaned_data['number_of_periods']
         second_period = form.cleaned_data['second_period']
 
         repayment = calculate_equal_installment_changeable_ip_repayment_plan(borrowed_amount,
                                                                              interest_rate_first_period,
                                                                              interest_rate_second_period,
-                                                                             first_period,
+                                                                             number_of_periods,
                                                                              second_period,
                                                                              )
 
@@ -313,7 +319,7 @@ class EqualInstallmentChangeableIpEditView(LoginRequiredMixin, UserPassesTestMix
             context['borrowed_amount'] = self.object.borrowed_amount
             context['interest_rate_first_period'] = self.object.interest_rate_first_period
             context['interest_rate_second_period'] = self.object.interest_rate_second_period
-            context['first_period'] = self.object.first_period
+            context['number_of_periods'] = self.object.number_of_periods
             context['second_period'] = self.object.second_period
         return context
 
@@ -340,7 +346,7 @@ class EqualInstallmentChangeableIpDeleteView(LoginRequiredMixin, UserPassesTestM
 
 class EqualPrincipalPortionChangeableIPCalculateView(LoginRequiredMixin, OperationNameContextMixin, FormView):
     template_name = 'repayment_plans_templates/repayment_plans_calculations.html'
-    form_class = EqualInstallmentChangeableIPForm
+    form_class = EqualPrincipalPortionChangeableIPForm
     operation_name = "Equal Principal Portion With Changeable IP Repayment Plan"
 
     def form_valid(self, form):
@@ -348,13 +354,13 @@ class EqualPrincipalPortionChangeableIPCalculateView(LoginRequiredMixin, Operati
             borrowed_amount = form.cleaned_data['borrowed_amount']
             interest_rate_first_period = form.cleaned_data['interest_rate_first_period']
             interest_rate_second_period = form.cleaned_data['interest_rate_second_period']
-            first_period = form.cleaned_data['first_period']
+            number_of_periods = form.cleaned_data['number_of_periods']
             second_period = form.cleaned_data['second_period']
 
             repayment = calculate_equal_principle_portion_changeable_ip_repayment_plan(borrowed_amount,
                                                                                  interest_rate_first_period,
                                                                                  interest_rate_second_period,
-                                                                                 first_period,
+                                                                                 number_of_periods,
                                                                                  second_period,
                                                                                  )
             print(repayment)
@@ -369,13 +375,13 @@ class EqualPrincipalPortionChangeableIPCalculateView(LoginRequiredMixin, Operati
             borrowed_amount=borrowed_amount,
             interest_rate_first_period=interest_rate_first_period,
             interest_rate_second_period=interest_rate_second_period,
-            first_period=first_period,
+            number_of_periods=number_of_periods,
             second_period=second_period,
         ))
 
 class EqualPrincipalPortionChangeableIPSaveView(LoginRequiredMixin, CreateActionFormValidMixin, CreateView):
     model = EqualPrincipalPortionChangeableIPPlan
-    fields = ['borrowed_amount', 'interest_rate_first_period', 'interest_rate_second_period', 'first_period',
+    fields = ['borrowed_amount', 'interest_rate_first_period', 'interest_rate_second_period', 'number_of_periods',
               'second_period', 'repayment']
     success_url = reverse_lazy('equal-pp-changeable-ip-calculation')
 
@@ -406,13 +412,13 @@ class EqualPrincipalPortionChangeableIPEditView(LoginRequiredMixin, UserPassesTe
         borrowed_amount = form.cleaned_data['borrowed_amount']
         interest_rate_first_period = form.cleaned_data['interest_rate_first_period']
         interest_rate_second_period = form.cleaned_data['interest_rate_second_period']
-        first_period = form.cleaned_data['first_period']
+        number_of_periods = form.cleaned_data['number_of_periods']
         second_period = form.cleaned_data['second_period']
 
         repayment = calculate_equal_principle_portion_changeable_ip_repayment_plan(borrowed_amount,
                                                                                    interest_rate_first_period,
                                                                                    interest_rate_second_period,
-                                                                                   first_period, second_period,
+                                                                                   number_of_periods, second_period,
                                                                                    )
 
         plan.repayment = repayment
@@ -428,7 +434,7 @@ class EqualPrincipalPortionChangeableIPEditView(LoginRequiredMixin, UserPassesTe
             context['borrowed_amount'] = self.object.borrowed_amount
             context['interest_rate_first_period'] = self.object.interest_rate_first_period
             context['interest_rate_second_period'] = self.object.interest_rate_second_period
-            context['first_period'] = self.object.first_period
+            context['number_of_periods'] = self.object.number_of_periods
             context['second_period'] = self.object.second_period
         return context
 

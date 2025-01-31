@@ -52,7 +52,7 @@ class EqualPrincipalPortionDeleteForm(DisabledReadonlyMixin, EqualPrincipalPorti
 
 class BaseChangeableIPForm(forms.ModelForm):
     class Meta:
-        fields = ['borrowed_amount', 'interest_rate_first_period', 'interest_rate_second_period', 'first_period', 'second_period']
+        fields = ['borrowed_amount', 'interest_rate_first_period', 'interest_rate_second_period', 'number_of_periods', 'second_period']
         widgets = {
             'borrowed_amount': forms.NumberInput(attrs={
                 'step': '0.01',
@@ -69,10 +69,11 @@ class BaseChangeableIPForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Interest rate for period (e.g., 0.1 for 10%)',
             }),
-            'first_period': forms.NumberInput(attrs={
+            'number_of_periods': forms.NumberInput(attrs={
                 'step': '0.01',
                 'class': 'form-control',
                 'placeholder': 'First repayment periods (e.g., 4)',
+                # 'label_tag': 'All periods:',
             }),
             'second_period': forms.NumberInput(attrs={
                 'step': '0.01',

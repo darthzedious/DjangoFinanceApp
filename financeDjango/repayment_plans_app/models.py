@@ -95,7 +95,7 @@ class BaseChangeableIPPlan(models.Model):
         blank=False,
     )
 
-    first_period = models.IntegerField(
+    number_of_periods = models.IntegerField(
         default=1,
         validators=[
             MinValueValidator(1),

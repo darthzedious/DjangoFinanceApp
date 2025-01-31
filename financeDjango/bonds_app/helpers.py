@@ -1,3 +1,7 @@
+from financeDjango.annuity_factor_app.helpers import calculate_present_value_annuity_factor_end_year_payment
+from financeDjango.discount_factor_app.helpers import calculate_the_discount_factor
+
+
 def zero_coupon_bond_yield_to_maturity(n, N, po):
     """
     Calculate the yield to maturity (YTM) for a zero-coupon bond.
@@ -38,25 +42,25 @@ def calculate_zero_coupon_bond_price(n, N, r):
     return price
 
 
-# def calculate_coupon_bond_price(n, N, c, r):
-#     """
-#     Calculate the price of a coupon bond.
-#
-#     Args:
-#         n (int): The number of periods until maturity.
-#         N (float): The face value (or par value) of the bond.
-#         c (float): The coupon rate (as a decimal, e.g., 0.05 for 5%).
-#         r (float): The yield to maturity (as a decimal, e.g., 0.05 for 5%).
-#
-#     Returns:
-#         float: The price of the coupon bond.
-#     """
-#     c = N * c # Calculate the coupon payment.
-#     if c == r: # If the coupon rate equals the yield, the price equals the face value.
-#         return N
-#
-#     price = c * calculate_present_value_annuity_factor_end_year_payment(r, n) + N * calculate_the_discount_factor(r, n)
-#     return price
+def calculate_coupon_bond_price(n, N, c, r):
+    """
+    Calculate the price of a coupon bond.
+
+    Args:
+        n (int): The number of periods until maturity.
+        N (float): The face value (or par value) of the bond.
+        c (float): The coupon rate (as a decimal, e.g., 0.05 for 5%).
+        r (float): The yield to maturity (as a decimal, e.g., 0.05 for 5%).
+
+    Returns:
+        float: The price of the coupon bond.
+    """
+    c = N * c # Calculate the coupon payment.
+    if c == r: # If the coupon rate equals the yield, the price equals the face value.
+        return N
+
+    price = c * calculate_present_value_annuity_factor_end_year_payment(r, n) + N * calculate_the_discount_factor(r, n)
+    return price
 
 def calculate_coupon_bond_yield_to_maturity(c, N, p, n, payment_period=None):
     """

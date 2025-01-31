@@ -63,7 +63,7 @@ class AdminEqualPrincipalPortionPlan(AdminAddFieldSetMixin, admin.ModelAdmin):
 @admin.register(EqualInstallmentChangeableIPPlan)
 class AdminEqualInstallmentChangeableIPPlan(AdminAddFieldSetMixin, admin.ModelAdmin):
     list_display = ('user', 'borrowed_amount', 'interest_rate_first_period',
-                    'interest_rate_second_period', 'first_period',
+                    'interest_rate_second_period', 'number_of_periods',
                     'second_period', 'created_at')
     search_fields = ('user__email',)
     ordering = ('user',)
@@ -76,7 +76,7 @@ class AdminEqualInstallmentChangeableIPPlan(AdminAddFieldSetMixin, admin.ModelAd
             {
                 'fields': ('user', 'borrowed_amount',
                            'interest_rate_first_period','interest_rate_second_period',
-                           'first_period', 'second_period',)
+                           'number_of_periods', 'second_period',)
             }
         ),
     )
@@ -88,7 +88,7 @@ class AdminEqualInstallmentChangeableIPPlan(AdminAddFieldSetMixin, admin.ModelAd
                 "classes": ("wide",),
                 'fields': ('user', 'borrowed_amount',
                            'interest_rate_first_period','interest_rate_second_period',
-                           'first_period', 'second_period',),
+                           'number_of_periods', 'second_period',),
             },
         ),
     )
