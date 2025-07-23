@@ -8,7 +8,7 @@ from financeDjango.bonds_app.helpers import zero_coupon_bond_yield_to_maturity, 
 from financeDjango.mixins import OperationNameContextMixin
 
 
-class CalculateZeroCouponBondYieldToMaturity(LoginRequiredMixin, OperationNameContextMixin,FormView):
+class CalculateZeroCouponBondYieldToMaturity(LoginRequiredMixin, OperationNameContextMixin, FormView):
     template_name = 'shares_templates/calculations.html'
     form_class = ZeroCouponBondYieldToMaturityForm
     operation_name = 'Zero Coupon Bond Yield To Maturity'

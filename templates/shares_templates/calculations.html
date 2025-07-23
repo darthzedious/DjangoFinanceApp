@@ -26,6 +26,7 @@
                                 <div class="mb-3">
                                     {{ field.label_tag }}
                                     {{ field }}
+
                                     {% if field.errors %}
                                         <div class="text-danger small mt-1">
                                             {% for error in field.errors %}
@@ -33,6 +34,7 @@
                                             {% endfor %}
                                         </div>
                                     {% endif %}
+
                                 </div>
                             {% endfor %}
                         </div>

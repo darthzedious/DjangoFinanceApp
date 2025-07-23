@@ -39,7 +39,7 @@ def calculate_zero_coupon_bond_price(n, N, r):
     783.5261664684588
     """
     price = N/(1 + r) **n
-    return price
+    return round(price, 3)
 
 
 def calculate_coupon_bond_price(n, N, c, r):
@@ -60,7 +60,7 @@ def calculate_coupon_bond_price(n, N, c, r):
         return N
 
     price = c * calculate_present_value_annuity_factor_end_year_payment(r, n) + N * calculate_the_discount_factor(r, n)
-    return price
+    return round(price, 3)
 
 def calculate_coupon_bond_yield_to_maturity(c, N, p, n, payment_period=None):
     """
@@ -84,4 +84,4 @@ def calculate_coupon_bond_yield_to_maturity(c, N, p, n, payment_period=None):
         c = c * N
 
     ytm = (c + (N - p) / n) / ((N + p) / 2)
-    return round(ytm, 5)
+    return round(ytm, 3)

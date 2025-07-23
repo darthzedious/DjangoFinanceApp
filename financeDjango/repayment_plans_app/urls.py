@@ -41,6 +41,5 @@ path('equal-pp-changeable-ip-list', views.EqualPrincipalPortionChangeableIPListV
 path('equal-pp-changeable-ip/<int:pk>/', include([
     path('edit/', views.EqualPrincipalPortionChangeableIPEditView.as_view(), name='edit-equal-pp-changeable-ip'),
     path('delete/', views.EqualPrincipalPortionChangeableIPDeleteView.as_view(), name='delete-equal-pp-changeable-ip'),
-    ])),
-
+    ]))
 ]
