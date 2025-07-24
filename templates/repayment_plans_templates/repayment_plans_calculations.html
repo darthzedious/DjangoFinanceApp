@@ -69,6 +69,40 @@
             </div>
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <canvas id="principalChart" height="100"></canvas>
+        <script>
+            const repaymentData = {{ repayment|safe }};
+            const periods = repaymentData.map(row => row.n);
+            const remainingPrincipal = repaymentData.map(row => row.RP);
+
+            const ctx = document.getElementById('principalChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: periods,
+                    datasets: [{
+                        label: 'Remaining Principal',
+                        data: remainingPrincipal,
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {display: true}
+                    },
+                    scales: {
+                        y: {beginAtZero: false},
+                        x: {title: {display: true, text: 'Period'}}
+                    }
+                }
+            });
+        </script>
+
+
         {% if operation_name == "Equal Installment Repayment Plan" %}
             <form method="post" action="{% url 'equal-installment-save' %}" class="mt-3">
                 {% csrf_token %}

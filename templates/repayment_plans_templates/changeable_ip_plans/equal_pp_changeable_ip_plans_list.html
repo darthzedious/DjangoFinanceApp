@@ -1,4 +1,5 @@
 {% extends 'home_menu/home.html' %}
+{% load static %}
 
 {% block content %}
     <div class="container mt-4">
@@ -56,6 +57,15 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
+
+                            {# the charts display loading from static #}
+                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                            <canvas id="chart-{{ plan.id }}" height="100"></canvas>
+                            <script src="{% static 'js/chart-renderer.js' %}"></script>
+                            <script>
+                                renderRepaymentChart({{ plan.id }}, {{ plan.repayment_table|safe }});
+                            </script>
+
                         {% else %}
                             <p class="text-muted">No repayment data available for this plan.</p>
                         {% endif %}
